@@ -1,0 +1,271 @@
+import React from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { CheckCircle2, Home, HeartHandshake, Building2, Users, MapPin, Phone, Mail, Landmark, ArrowRight, BadgeCheck, Sparkles } from "lucide-react";
+
+// Single-file React site for Aple Property Manager LLC
+// TailwindCSS + shadcn/ui. Replace placeholder submit handlers with real endpoints as needed.
+
+export default function AplePropertyManagerSite() {
+  return (
+    <div className="min-h-screen bg-white text-gray-900">
+      {/* NAVBAR */}
+      <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-2">
+            <span className="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-emerald-100">
+              <Home className="h-5 w-5 text-emerald-600" />
+            </span>
+            <div className="text-xl font-semibold">Aple Property Manager LLC</div>
+          </div>
+          <nav className="hidden gap-6 md:flex">
+            <a href="#mission" className="text-sm hover:text-emerald-700">Mission</a>
+            <a href="#services" className="text-sm hover:text-emerald-700">Services</a>
+            <a href="#impact" className="text-sm hover:text-emerald-700">Impact</a>
+            <a href="#partners" className="text-sm hover:text-emerald-700">Partners</a>
+            <a href="#contact" className="text-sm hover:text-emerald-700">Contact</a>
+          </nav>
+          <div className="hidden md:block">
+            <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
+              <a href="#contact">Refer a Client</a>
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      {/* HERO */}
+      <section className="relative overflow-hidden">
+        <div className="absolute inset-0 -z-10 bg-gradient-to-b from-emerald-50 via-white to-white" />
+        <div className="mx-auto grid max-w-7xl gap-8 px-4 py-16 md:grid-cols-2 md:py-24">
+          <div className="flex flex-col justify-center">
+            <h1 className="text-4xl font-bold leading-tight md:text-5xl">
+              Stable Housing. Restored Dignity. Stronger Houston.
+            </h1>
+            <p className="mt-4 max-w-prose text-lg text-gray-700">
+              We help disenfranchised individuals—including people exiting incarceration, those in recovery, and clients on SSI—secure safe, stable, and affordable homes. Housing first, with compassion, integrity, and community partnership.
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <Button className="bg-emerald-600 hover:bg-emerald-700" asChild>
+                <a href="#contact">Get Support</a>
+              </Button>
+              <Button variant="outline" asChild>
+                <a href="#mission">Our Mission</a>
+              </Button>
+            </div>
+            <div className="mt-6 flex items-center gap-3 text-sm text-gray-600">
+              <BadgeCheck className="h-4 w-4 text-emerald-600" />
+              <span>Houston-focused • Trauma-informed • Property management + wraparound support</span>
+            </div>
+          </div>
+          <div className="flex items-center justify-center">
+            <Card className="w-full max-w-md shadow-lg">
+              <CardHeader>
+                <CardTitle className="flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-emerald-600" /> Quick Referral
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={(e)=>{e.preventDefault(); alert('Thanks! We\'ll reach out shortly.');}} className="grid gap-3">
+                  <Input placeholder="Referrer Name" required />
+                  <Input placeholder="Client Name" required />
+                  <Input type="email" placeholder="Email (optional)" />
+                  <Input type="tel" placeholder="Phone" required />
+                  <Textarea placeholder="Brief situation (e.g., parole release, recovery, SSI)" rows={3} />
+                  <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                    Submit Referral <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* MISSION */}
+      <section id="mission" className="border-t bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <h2 className="text-3xl font-semibold">Our Mission & Vision</h2>
+              <p className="mt-4 text-gray-700">
+                Our mission is to alleviate desperation by addressing the root causes of homelessness and providing stable housing that empowers individuals to overcome challenges such as addiction and disenfranchisement.
+              </p>
+              <p className="mt-3 text-gray-700">
+                Our vision is a stronger, safer Houston where everyone has access to resources to thrive and reintegrate into society with dignity.
+              </p>
+              <ul className="mt-6 grid gap-3 text-gray-800">
+                {[
+                  { icon: <HeartHandshake className="h-5 w-5 text-emerald-600" />, text: 'Compassion—respect and dignity for every client.' },
+                  { icon: <CheckCircle2 className="h-5 w-5 text-emerald-600" />, text: 'Integrity—transparency and accountability.' },
+                  { icon: <Users className="h-5 w-5 text-emerald-600" />, text: 'Community—engaging partners to build safer neighborhoods.' },
+                ].map((item, i) => (
+                  <li key={i} className="flex items-start gap-3">
+                    {item.icon}
+                    <span>{item.text}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div className="rounded-2xl border p-6">
+              <h3 className="text-xl font-semibold">Origin Story</h3>
+              <p className="mt-3 text-gray-700">
+                Aple began after years working alongside parolees who were denied housing due to records or recovery histories. Without a safe address, reintegration stalls and recidivism rises. We founded Aple to flip that script—housing first, then employment, education, and long-term stability.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVICES */}
+      <section id="services" className="border-t bg-emerald-50/60">
+        <div className="mx-auto max-w-7xl px-4 py-16">
+          <h2 className="text-3xl font-semibold">What We Provide</h2>
+          <p className="mt-2 max-w-2xl text-gray-700">
+            Safe, stable, and affordable accommodations—paired with a calm environment, high standards of cleanliness, and responsive property care.
+          </p>
+
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {[
+              {
+                title: 'Transitional & Supportive Housing',
+                icon: <Building2 className="h-5 w-5 text-emerald-600" />,
+                copy: 'Quiet, well-maintained homes suitable for parole reentry, recovery, and SSI clients.',
+              },
+              {
+                title: 'Wraparound Coordination',
+                icon: <Users className="h-5 w-5 text-emerald-600" />,
+                copy: 'Collaboration with parole officers and agencies (Endeavor, Goodwill, Salvation Army) to match clients and services.',
+              },
+              {
+                title: 'Property Management',
+                icon: <Home className="h-5 w-5 text-emerald-600" />,
+                copy: 'Repairs, upkeep, and standards that honor residents’ dignity and safety.',
+              },
+            ].map((s, i) => (
+              <Card key={i} className="shadow-sm">
+                <CardHeader className="flex flex-row items-center gap-3">
+                  {s.icon}
+                  <CardTitle className="text-lg">{s.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-gray-700">{s.copy}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* IMPACT METRICS */}
+      <section id="impact" className="border-t bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16">
+          <h2 className="text-3xl font-semibold">Impact & Outcomes</h2>
+          <p className="mt-2 max-w-2xl text-gray-700">
+            We measure success by stability, employment, and reduced recidivism—not just occupancy.
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-4">
+            {[
+              { label: 'Individuals Housed', value: '250+' },
+              { label: 'Maintained Housing', value: '80%+' },
+              { label: 'Job Placements', value: '150+' },
+              { label: 'Recidivism Reduction', value: '-35%' },
+            ].map((m, i) => (
+              <Card key={i} className="text-center shadow-sm">
+                <CardHeader>
+                  <CardTitle className="text-3xl font-bold text-emerald-700">{m.value}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-gray-700">{m.label}</CardContent>
+              </Card>
+            ))}
+          </div>
+          <p className="mt-4 text-xs text-gray-500">*Sample figures for layout — replace with live metrics.</p>
+        </div>
+      </section>
+
+      {/* PARTNERS */}
+      <section id="partners" className="border-t bg-emerald-50/60">
+        <div className="mx-auto max-w-7xl px-4 py-16">
+          <h2 className="text-3xl font-semibold">Community Partners</h2>
+          <p className="mt-2 max-w-2xl text-gray-700">
+            We collaborate with parole boards and nonprofits to align housing with support services.
+          </p>
+          <div className="mt-8 grid gap-6 md:grid-cols-3">
+            {[
+              { name: 'Endeavor', desc: 'Client referrals & case coordination.' },
+              { name: 'Goodwill', desc: 'Employment pathways and training.' },
+              { name: 'Salvation Army', desc: 'Supportive services & resources.' },
+            ].map((p, i) => (
+              <Card key={i}>
+                <CardHeader>
+                  <CardTitle>{p.name}</CardTitle>
+                </CardHeader>
+                <CardContent className="text-gray-700">{p.desc}</CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CONTACT */}
+      <section id="contact" className="border-t bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-16">
+          <div className="grid gap-8 md:grid-cols-2">
+            <div>
+              <h2 className="text-3xl font-semibold">Contact & Referrals</h2>
+              <p className="mt-2 text-gray-700">We welcome referrals from parole officers, nonprofits, and families. Reach out to discuss availability and fit.</p>
+              <ul className="mt-6 space-y-3 text-gray-800">
+                <li className="flex items-center gap-3"><MapPin className="h-5 w-5 text-emerald-600" /> Houston, Texas</li>
+                <li className="flex items-center gap-3"><Phone className="h-5 w-5 text-emerald-600" /> (XXX) XXX-XXXX</li>
+                <li className="flex items-center gap-3"><Mail className="h-5 w-5 text-emerald-600" /> hello@aplepm.org</li>
+                <li className="flex items-center gap-3"><Landmark className="h-5 w-5 text-emerald-600" /> 501(c)(3) partner-ready</li>
+              </ul>
+            </div>
+            <Card className="shadow-lg">
+              <CardHeader>
+                <CardTitle>Send a Message</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <form onSubmit={(e)=>{e.preventDefault(); alert('Message sent!');}} className="grid gap-3">
+                  <Input placeholder="Your Name" required />
+                  <Input type="email" placeholder="Your Email" required />
+                  <Textarea placeholder="How can we help?" rows={4} required />
+                  <Button type="submit" className="bg-emerald-600 hover:bg-emerald-700">
+                    Send <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA STRIP */}
+      <section className="border-t bg-emerald-600 text-white">
+        <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-4 px-4 py-10 md:flex-row md:items-center">
+          <div>
+            <h3 className="text-2xl font-semibold">Join us in rebuilding lives through housing.</h3>
+            <p className="mt-1 text-emerald-100">Refer a client, partner with us, or support our next home acquisition.</p>
+          </div>
+          <Button variant="secondary" asChild>
+            <a href="#contact">Get Involved</a>
+          </Button>
+        </div>
+      </section>
+
+      {/* FOOTER */}
+      <footer className="border-t bg-white">
+        <div className="mx-auto max-w-7xl px-4 py-10 text-sm text-gray-600">
+          <div className="flex flex-col items-start justify-between gap-4 md:flex-row md:items-center">
+            <p>© {new Date().getFullYear()} Aple Property Manager LLC. All rights reserved.</p>
+            <div className="flex items-center gap-4">
+              <a href="#mission" className="hover:text-emerald-700">Mission</a>
+              <a href="#services" className="hover:text-emerald-700">Services</a>
+              <a href="#impact" className="hover:text-emerald-700">Impact</a>
+              <a href="#contact" className="hover:text-emerald-700">Contact</a>
+            </div>
+          </div>
+        </div>
+      </footer>
+    </div>
+  );
+}
