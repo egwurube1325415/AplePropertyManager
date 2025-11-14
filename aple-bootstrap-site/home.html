@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Welcome | Aple Property Manager</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<!-- SIDE NAV (drawer) -->
+<aside id="aple-drawer"
+       class="drawer"
+       role="dialog"
+       aria-modal="true"
+       aria-labelledby="drawer-title"
+       aria-hidden="true">
+  <div class="drawer-panel" role="navigation">
+    <div class="drawer-head">
+      <h2 id="drawer-title">Aple Property Manager</h2>
+      <button id="drawer-close" class="iconbtn" aria-label="Close menu">✕</button>
+    </div>
+
+    <nav class="drawer-nav">
+      <a href="index.html" class="drawer-link">Landing</a>
+      <a href="home.html" class="drawer-link">Home</a>
+      <a href="index.html#about" class="drawer-link">About</a>
+      <a href="index.html#services" class="drawer-link">Services</a>
+      <a href="index.html#contact" class="drawer-link">Contact</a>
+      <a href="index.html#contact" class="drawer-cta">Refer a Client</a>
+    </nav>
+
+    <div class="drawer-foot">
+      <small>© <span id="drawerYear"></span> Aple Property Manager</small>
+    </div>
+  </div>
+
+  <!-- Click-to-close backdrop -->
+  <div class="drawer-backdrop" tabindex="-1"></div>
+</aside>
+
+<body>
+  <!-- Top bar reused -->
+  <header class="topstrip">
+    <button class="iconbtn" aria-label="Open menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <div class="brand">
+      <img src="images/logo.png" alt="Aple logo" height="32" />
+      <span>Aple Property Manager</span>
+    </div>
+    <nav class="actions">
+      <button class="iconbtn" aria-label="Search">🔎</button>
+      <a class="signin" href="index.html">Main Site</a>
+    </nav>
+  </header>
+
+  <!-- Hero with Houston skyline background -->
+  <main class="hero alt-hero">
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="hero-center">
+      <h1 class="title">Welcome to Aple Property Manager</h1>
+      <p class="subtitle">
+        Providing safe, supportive, and affordable housing for individuals and families in transition.
+      </p>
+      <a href="index.html#about" class="cta-btn">Learn More</a>
+    </div>
+  </main>
+
+  <footer class="alt-footer">
+    <p>© <span id="year"></span> Aple Property Manager LLC. All rights reserved.</p>
+  </footer>
+
+  <script src="./script.js">
+    // dynamic year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>

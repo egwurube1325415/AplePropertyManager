@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>About | Aple Property Manager</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top strip -->
+  <header class="topstrip">
+    <button class="iconbtn" aria-label="Open menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <div class="brand">
+      <img src="./images/logo.png" alt="Aple logo" height="32"/>
+      <span>Aple Property Manager</span>
+    </div>
+    <nav class="actions">
+      <a class="signin" href="./index.html">Landing</a>
+    </nav>
+  </header>
+
+  <!-- Drawer (same IDs so script.js works) -->
+  <aside id="aple-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-panel" role="navigation">
+      <div class="drawer-head">
+        <h2 id="drawer-title">Aple Property Manager</h2>
+        <button id="drawer-close" class="iconbtn" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="./index.html" class="drawer-link">Landing</a>
+        <a href="./home.html" class="drawer-link">Home</a>
+        <a href="./about.html" class="drawer-link">About</a>
+        <a href="./index.html#services" class="drawer-link">Services</a>
+        <a href="./index.html#contact" class="drawer-link">Contact</a>
+        <a href="./index.html#contact" class="drawer-cta">Refer a Client</a>
+      </nav>
+      <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
+    </div>
+    <div class="drawer-backdrop" tabindex="-1"></div>
+  </aside>
+
+  <!-- HERO: background video -->
+  <section class="page-hero video-hero">
+    <video class="hero-video" autoplay muted playsinline loop poster="./assets/apm1.jpg">
+      <source src="./assets/scene1.mp4" type="video/mp4"/>
+    </video>
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <h1 class="title">About Aple</h1>
+      <p class="subtitle">Housing first. Dignity always. We create safe, supportive homes across Houston for people rebuilding their lives.</p>
+    </div>
+  </section>
+
+  <main class="page-wrap">
+    <!-- What we do -->
+    <section class="section">
+      <div class="feature">
+        <div>
+          <h2>What We Do</h2>
+          <p>Aple Property Manager helps disenfranchised individuals secure safe, stable, and affordable housing. We focus on people who are too often turned away—parole-eligible individuals, people in recovery, and SSI recipients—so they can restart with a real address, real support, and real dignity.</p>
+          <p>Our homes are quiet, well-kept, and community-minded. We coordinate with partners to layer in employment assistance, counseling, and other services that turn housing into long-term stability.</p>
+        </div>
+        <img src="./assets/apm6.jpg" alt="Warm, comfortable living room in an Aple home" loading="lazy">
+      </div>
+    </section>
+
+    <!-- Mission / Vision / Values -->
+    <section class="section grid-3">
+      <article class="card">
+        <h2>Mission</h2>
+        <p>Alleviate desperation by addressing homelessness at the root—providing stable housing and wraparound support so people can overcome addiction, stigma, and disenfranchisement.</p>
+      </article>
+      <article class="card">
+        <h2>Vision</h2>
+        <p>A stronger, safer Houston where supportive housing is accessible, neighbors feel secure, and every resident has a fair path to reintegration and self-sufficiency.</p>
+      </article>
+      <article class="card">
+        <h2>Core Values</h2>
+        <ul class="bullets">
+          <li><strong>Compassion</strong>—respect and dignity in every interaction.</li>
+          <li><strong>Integrity</strong>—transparency, accountability, reliability.</li>
+          <li><strong>Community</strong>—partnerships with agencies, nonprofits, and landlords.</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Video band -->
+    <section class="video-band">
+      <video class="band-video" autoplay muted playsinline loop poster="./assets/apm2.jpg">
+        <source src="./assets/scene2.mp4" type="video/mp4"/>
+      </video>
+      <div class="band-overlay"></div>
+      <div class="band-content">
+        <h2>Housing that feels like home</h2>
+        <p>Calm, clean homes with standards that respect neighbors and give residents a foundation to grow.</p>
+      </div>
+    </section>
+
+    <!-- Origin & Team -->
+    <section class="section grid-2">
+      <article class="card">
+        <h2>Origin Story</h2>
+        <p>Aple began after years of watching people denied housing due to records or recovery histories. Without a safe address, parole is delayed and progress stalls. We launched Aple to flip the script—secure housing first, then stack services to sustain success and reduce recidivism.</p>
+      </article>
+      <article class="card">
+        <h2>Team & Partnerships</h2>
+        <p>Led by the founder, we collaborate with parole officers, trusted contractors, and social service groups (e.g., Goodwill, Salvation Army, Endeavor). Together we match residents with the right home, keep properties in top shape, and coordinate the support that keeps people moving forward.</p>
+      </article>
+    </section>
+
+    <!-- Problem / Solution / Why us -->
+    <section class="section grid-3">
+      <article class="card">
+        <h2>The Problem</h2>
+        <p>People ready to reenter society are blocked by housing denials. Some remain incarcerated; others land on the street—without stability, everything else gets harder.</p>
+      </article>
+      <article class="card">
+        <h2>Our Solution</h2>
+        <p>Quiet, well-maintained homes plus dependable property management and coordinated services. Residents get a safe base; neighbors get peace of mind.</p>
+      </article>
+      <article class="card">
+        <h2>Why Aple</h2>
+        <p>10+ years working with this community, a strong referral network, and proven operations across Houston allow us to meet demand quickly and responsibly.</p>
+      </article>
+    </section>
+
+    <!-- Who we serve -->
+    <section class="section">
+      <div class="card">
+        <h2>Who We Serve</h2>
+        <p>Disenfranchised individuals including those in recovery, SSI recipients, and people awaiting parole who need a stable address to qualify. We specialize in residents who face systemic barriers to traditional leases.</p>
+      </div>
+    </section>
+
+    <!-- Outreach / Metrics (sample; wire to data later) -->
+    <section class="section kpis">
+      <div class="kpi"><div class="kpi-num">250+</div><div class="kpi-label">Individuals Housed</div></div>
+      <div class="kpi"><div class="kpi-num">80%</div><div class="kpi-label">Maintained Housing</div></div>
+      <div class="kpi"><div class="kpi-num">150</div><div class="kpi-label">Job Placements</div></div>
+      <div class="kpi"><div class="kpi-num">35%</div><div class="kpi-label">Recidivism Reduction</div></div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section cta">
+      <h2>Refer a Client or Partner With Us</h2>
+      <p>We respond within 1–2 business days.</p>
+      <a class="cta-btn" href="./index.html#contact">Get in Touch</a>
+    </section>
+  </main>
+
+  <footer class="alt-footer">
+    <p>© <span id="year"></span> Aple Property Manager LLC. All rights reserved.</p>
+  </footer>
+
+  <script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+  <script src="./script.js"></script>
+</body>
+</html>

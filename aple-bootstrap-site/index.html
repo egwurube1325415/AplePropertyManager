@@ -1,49 +1,63 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <title>Aple Property Manager</title>
-  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style.css"/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
 <body>
-  <!-- Thin aqua top strip (KHov vibe) -->
+
+  <!-- Top strip -->
   <header class="topstrip">
     <button class="iconbtn" aria-label="Open menu">
       <span class="bar"></span><span class="bar"></span><span class="bar"></span>
     </button>
     <div class="brand">
-      <img src="images/logo.png" alt="Aple logo" height="32" />
+      <img src="images/logo.png" alt="Aple logo" height="32">
       <span>Aple Property Manager</span>
     </div>
     <nav class="actions">
       <button class="iconbtn" aria-label="Search">🔎</button>
-      <a class="signin" href="#contact">Sign In</a>
+      <a class="signin" href="home.html">Home</a>
     </nav>
   </header>
 
-  <!-- HERO: image slideshow -->
+  <!-- Drawer -->
+  <aside id="aple-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-panel" role="navigation">
+      <div class="drawer-head">
+        <h2 id="drawer-title">Aple Property Manager</h2>
+        <button id="drawer-close" class="iconbtn" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="#hero" class="drawer-link">Landing</a>
+        <a href="home.html" class="drawer-link">Home</a>
+        <a href="about.html" class="drawer-link">About</a>
+        <a href="#content" class="drawer-link">Services</a>
+        <a href="#content" class="drawer-link">Contact</a>
+        <a href="#contact" class="drawer-cta">Refer a Client</a>
+      </nav>
+      <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
+    </div>
+    <div class="drawer-backdrop" tabindex="-1"></div>
+  </aside>
+
+  <!-- Hero slideshow -->
   <main id="hero" class="hero">
     <div class="slide back"></div>
     <div class="slide front"></div>
     <div class="overlay" aria-hidden="true"></div>
 
     <section class="center" role="region" aria-label="Intro">
-      <h1 class="title">
-        Find Your New Dream Home
-        <span class="subtitle">Alternative &amp; supportive housing that feels like home.</span>
-      </h1>
-
-      <form class="search" role="search" action="/search" method="get">
+      <h1 class="title">Alternative &amp; supportive<br/>housing that feels like home.</h1>
+      <form class="search" role="search" action="#" method="get">
         <span aria-hidden="true">🔎</span>
-        <input type="search" name="q"
-               placeholder="Search by market, city, state, community"
-               aria-label="Search homes" required />
+        <input type="search" name="q" placeholder="Search by market, city, state, community" aria-label="Search homes" required>
         <button class="visually-hidden" type="submit">Search</button>
       </form>
-
       <button id="toggle" class="circlebtn" aria-pressed="false" aria-label="Pause slideshow">❚❚</button>
     </section>
 
@@ -53,7 +67,7 @@
   <!-- Below-the-fold placeholder -->
   <section id="content" class="content">
     <h2>Welcome to Aple</h2>
-    <p>Use this space for About/Services/Contact once your hero is set.</p>
+    <p>Replace this with your real sections after the hero is working.</p>
   </section>
 
   <script src="script.js"></script>
