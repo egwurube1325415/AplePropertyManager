@@ -260,3 +260,385 @@ section{scroll-margin-top:90px}
   transition: background 0.25s ease;
 }
 .cta-btn:hover { background: #4d918d; }
+
+/* Contact specifics */
+.contact-card .contact-list{
+  list-style:none; padding:0; margin:8px 0 12px;
+  display:grid; gap:10px;
+}
+.contact-card .contact-list li{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:12px; padding:10px 12px; border:1px solid #e6e2dc; border-radius:12px; background:#fff;
+}
+.contact-card .contact-list span{ color:#6b6b6b; }
+.contact-card .small-note{ color:#6b6b6b; margin:8px 2px 0; }
+
+.contact-form{ display:grid; gap:12px; }
+.contact-form label{ display:grid; gap:6px; }
+.contact-form input, .contact-form textarea{
+  border:1px solid #e0dbd4; background:#fff; color:#2f2f2f;
+  border-radius:10px; padding:12px; font-size:16px; outline:none;
+}
+.contact-form input:focus, .contact-form textarea:focus{
+  border-color:#5ca8a4; box-shadow:0 0 0 3px rgba(92,168,164,.18);
+}
+.form-note{ margin:8px 0 0; color:#2f2f2f; }
+/* Landing page sections */
+.lp-section{ padding:44px 0; background:#f7f4ef; }
+.lp-wrap{ max-width:1200px; margin:0 auto; padding:0 16px; }
+.lp-title{ margin:0 0 10px; font-family:"Playfair Display",serif; font-size:clamp(26px,4.5vw,40px); color:#1f2a29; }
+.lp-sub{ margin:0 0 16px; color:#6b6b6b; }
+
+/* Cards grid */
+.lp-grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+@media (max-width:900px){ .lp-grid-3{ grid-template-columns:1fr; } }
+.lp-card{
+  background:#fff; border:1px solid #e6e2dc; border-radius:16px; padding:18px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+.lp-card h3{ margin:.25rem 0 .35rem; color:#2f2f2f; }
+.lp-card p{ margin:0; color:#444; }
+
+/* Chips wall */
+.chip-wall{ list-style:none; padding:0; margin:8px 0 0; display:flex; flex-wrap:wrap; gap:10px; }
+.chip-wall li{
+  background:#fff; color:#2f2f2f; border:1px solid #e6e2dc; border-radius:999px;
+  padding:8px 12px; font-size:14px; box-shadow:0 2px 8px rgba(0,0,0,.03);
+}
+.chip-wall em{ font-style:normal; color:#5ca8a4; font-weight:600; }
+
+/* Video band */
+.lp-video-band{ background:#f7f4ef; padding:0; }
+.lp-video-wrap{ position:relative; max-width:1100px; margin:0 auto; border-radius:20px; overflow:hidden; aspect-ratio:16/7; }
+.lp-band-video{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.lp-band-overlay{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,.45), rgba(0,0,0,.2)); }
+.lp-band-content{
+  position:relative; z-index:1; height:100%; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; color:#fff; padding:16px;
+}
+.cta-light{ background:rgba(255,255,255,.9); color:#0d3a38; }
+.cta-light:hover{ background:#fff; }
+
+/* Gallery */
+.lp-gallery{ background:#f7f4ef; }
+.lp-gallery .images figure{ margin:0; }
+.lp-gallery img{ width:100%; height:280px; object-fit:cover; border-radius:16px; border:1px solid #e6e2dc; }
+.lp-gallery figcaption{ text-align:center; margin-top:8px; color:#6b6b6b; }
+
+/* CTA button (uses your palette) */
+.cta-btn{
+  display:inline-block; margin-top:16px; padding:12px 20px; border-radius:10px; text-decoration:none;
+  font-weight:700; background:#5ca8a4; color:#fff; transition:background .25s ease, transform .05s ease-in;
+}
+.cta-btn:hover{ background:#4d918d; }
+.cta-btn:active{ transform:translateY(1px); }
+/* Pricing grid */
+.pricing-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:12px; }
+@media (max-width:900px){ .pricing-grid{ grid-template-columns:1fr; } }
+
+.price-card{
+  position:relative; background:#fff; border:1px solid #e6e2dc; border-radius:16px; padding:18px;
+  box-shadow:0 2px 8px rgba(0,0,0,.05);
+}
+.price-card.featured{ border-color:#5ca8a4; box-shadow:0 6px 18px rgba(92,168,164,.18); }
+.badge{
+  position:absolute; top:12px; right:12px;
+  background:#5ca8a4; color:#fff; font-weight:700; font-size:12px; padding:4px 8px; border-radius:999px;
+}
+.price-head{ display:flex; align-items:end; justify-content:space-between; gap:8px; margin-bottom:8px; }
+.price-head h3{ margin:0; color:#2f2f2f; }
+.price{ font-size:28px; font-weight:800; color:#2f2f2f; }
+.price span{ font-size:14px; font-weight:600; color:#6b6b6b; margin-left:2px; }
+
+.checklist{ list-style:none; padding:0; margin:8px 0 0; display:grid; gap:8px; }
+.checklist li{ position:relative; padding-left:26px; color:#444; }
+.checklist li::before{
+  content:"✓"; position:absolute; left:0; top:0; color:#5ca8a4; font-weight:900;
+}
+
+.micro-note{ margin-top:10px; color:#6b6b6b; }
+
+/* Link row under gallery */
+.link-row{ display:flex; gap:10px; flex-wrap:wrap; margin-top:16px; }
+
+/* Soft reassurance bar under pricing */
+.reassure{
+  margin-top:18px;
+  background:#e9f4f3;          /* gentle teal tint */
+  border:1px solid #d4ebe9;
+  border-radius:14px;
+  padding:14px 16px;
+  color:#0d3a38;
+  box-shadow:0 1px 6px rgba(0,0,0,.04);
+}
+.reassure p{ margin:0; font-weight:600; }
+
+/* Reassurance banner redesign */
+.reassure {
+  position: relative;
+  overflow: hidden;
+  margin-top: 32px;
+  border-radius: 20px;
+  color: #0b2f2d;
+  text-align: center;
+  padding: 60px 20px;
+  background: #e9f4f3;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+}
+
+/* Layer images blended for soft ambience */
+.reassure::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: 
+    url("./assets/apm10.jpg") center/cover no-repeat,
+    url("./assets/apm11.jpg") center/cover no-repeat;
+  opacity: 0.25;
+  mix-blend-mode: lighten;
+  z-index: 0;
+}
+
+/* Overlay for readability */
+.reassure-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.85) 0%,
+    rgba(255, 255, 255, 0.9) 100%
+  );
+  z-index: 1;
+}
+
+.reassure-content {
+  position: relative;
+  z-index: 2;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.reassure-content h3 {
+  font-family: "Playfair Display", serif;
+  font-size: 1.8rem;
+  margin-bottom: 0.5em;
+  color: #134b48;
+}
+
+.reassure-content p {
+  font-size: 1.05rem;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #204d4a;
+}
+
+@media (max-width: 768px) {
+  .reassure {
+    padding: 40px 16px;
+  }
+  .reassure-content h3 {
+    font-size: 1.5rem;
+  }
+}
+
+.bg-aple-light {
+  background-color: #eaf6f5; /* soft teal tint */
+  color: #0d3a38;
+}
+/* Make hero content truly centered */
+.page-hero .page-hero-inner.center{
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 0 auto;
+  min-height: clamp(340px, 52vh, 640px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;       /* horizontal centering */
+  justify-content: center;   /* vertical centering */
+  text-align: center;        /* center text */
+}
+
+/* Styled subtitle pill */
+.subtitle-chip{
+  margin: 12px 0 16px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  background: rgba(255,255,255,.92);
+  color: #0d3a38;
+  font-weight: 600;
+  box-shadow: 0 6px 18px rgba(0,0,0,.08);
+  backdrop-filter: blur(3px);
+  display: inline-block;
+}
+
+/* gentle entrance */
+.subtitle-chip{
+  animation: fadeInUp 800ms ease both;
+}
+@keyframes fadeInUp{
+  from{ opacity:0; transform: translateY(18px); }
+  to{ opacity:1; transform: translateY(0); }
+}
+/* --- HARD OVERRIDE: keep cards side-by-side and vertically centered --- */
+#partnersRow {
+  display: flex !important;         /* crush any prior grid rule */
+
+}
+
+/* Card sizing & look */
+#partnersRow .partner-card {
+  flex: 0 1 360px !important;       /* consistent width, can shrink a bit */
+  max-width: 380px !important;
+  width: 100% !important;
+  text-align: center;
+  background: #fff;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0,0,0,.08);
+}
+
+#partnersRow .partner-card img {
+  width: 100% !important;
+  height: auto !important;
+  display: block !important;
+}
+
+#partnersRow .partner-card figcaption {
+  font-weight: 600;
+  color: #0d3a38;
+  padding: 14px 10px 18px;
+  background: #f9f9f9;
+}
+
+/* Wrap to two/one columns only on smaller screens */
+@media (max-width: 1100px){
+  #partnersRow { flex-wrap: wrap !important; }
+}
+@media (max-width: 640px){
+  #partnersRow { gap: 22px !important; }
+  #partnersRow .partner-card { flex: 1 1 100% !important; max-width: 520px !important; }
+}
+
+/* ===== Aple Referral Form – visual upgrade (no Bootstrap required) ===== */
+
+/* Card wrapper */
+.aple-card {
+  background: #ffffff;
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 14px 40px rgba(0,0,0,.08);
+  border: 1px solid #ece7df;
+}
+
+/* Headings + helper text */
+.aple-title { color:#0d3a38; font-weight:800; margin-bottom:8px; }
+.aple-subtle { color:#51605f; }
+
+/* Labels and field spacing */
+#referralForm label { display:block; font-weight:600; color:#0f403d; margin-bottom:6px; }
+#referralForm .group { margin-bottom:16px; }
+
+/* Inputs, selects, textareas */
+#referralForm input:not([type="checkbox"]),
+#referralForm select,
+#referralForm textarea {
+  width: 100%;
+  border: 1px solid #e1dcd4;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+/* Focus ring */
+#referralForm input:not([type="checkbox"]):focus,
+#referralForm select:focus,
+#referralForm textarea:focus {
+  border-color: #5ca8a4;
+  box-shadow: 0 0 0 4px rgba(92,168,164,.18);
+}
+
+/* Select chevron */
+#referralForm select {
+  -webkit-appearance: none; -moz-appearance: none; appearance: none;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #0d3a38 50%),
+    linear-gradient(135deg, #0d3a38 50%, transparent 50%),
+    linear-gradient(to right, transparent, transparent);
+  background-position:
+    calc(100% - 18px) calc(50% - 3px),
+    calc(100% - 12px) calc(50% - 3px),
+    100% 0;
+  background-size: 6px 6px, 6px 6px, 2.2em 100%;
+  background-repeat: no-repeat;
+}
+
+/* Checkbox row */
+#referralForm .form-check { display:flex; align-items:flex-start; gap:10px; margin-top:6px; }
+#referralForm .form-check-input { width:18px; height:18px; margin-top:3px; }
+
+/* Validation messages (your existing text) */
+#referralForm .invalid-feedback { color:#b42318; font-size:.9rem; margin-top:6px; }
+
+/* CTA button */
+.aple-btn {
+  display:inline-block;
+  padding: 12px 22px;
+  border-radius: 12px;
+  background:#198754;
+  color:#fff;
+  font-weight:700;
+  border: none;
+  box-shadow: 0 8px 20px rgba(25,135,84,.25);
+  transition: transform .1s ease, box-shadow .2s ease, background .2s ease;
+}
+.aple-btn:hover { background:#157347; box-shadow:0 10px 24px rgba(25,135,84,.35); }
+.aple-btn:active { transform: translateY(1px); }
+
+/* Simple responsive grid (replaces Bootstrap cols if CDN fails) */
+.row { display:flex; flex-wrap:wrap; margin:-10px; }
+.col-12, .col-md-6, .col-md-4 { padding:10px; }
+.col-12 { flex:0 0 100%; max-width:100%; }
+.col-md-6 { flex:0 0 50%; max-width:50%; }
+.col-md-4 { flex:0 0 33.333%; max-width:33.333%; }
+@media (max-width: 900px){
+  .col-md-6, .col-md-4 { flex:0 0 100%; max-width:100%; }
+}
+
+/* Nice alert/incentive bar */
+.aple-alert {
+  background:#eaf6f5;
+  color:#0d3a38;
+  border:1px solid #d9efec;
+  padding:14px 16px;
+  border-radius:14px;
+  box-shadow:0 8px 24px rgba(0,0,0,.04);
+}
+
+/* Section spacing helper */
+.aple-section { padding: 24px 0; }
+/* Hide red messages by default */
+.invalid-feedback { 
+  display: none; 
+  color: #d93025; 
+  font-size: 0.9rem; 
+  margin-top: 6px; 
+  font-weight: 600;
+}
+
+/* Red highlight when invalid after submit */
+.is-invalid {
+  border-color: #d93025 !important;
+  box-shadow: 0 0 0 3px rgba(217,48,37,.15);
+}
+
+/* For custom checkboxes/radios */
+.form-check-input.is-invalid {
+  outline: 2px solid rgba(217,48,37,.45);
+  outline-offset: 2px;
+}
+

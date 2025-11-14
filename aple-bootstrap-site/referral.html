@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Refer a Client | Aple Property Manager</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("referralForm");
+      if (!form) return;
+    
+      const showFeedback = (el, show) => {
+        const group = el.closest(".group") || el.parentElement;
+        const fb = group ? group.querySelector(".invalid-feedback") : null;
+        if (fb) fb.style.display = show ? "block" : "none";
+        el.classList.toggle("is-invalid", show);
+        el.setAttribute("aria-invalid", show ? "true" : "false");
+      };
+    
+      const isEmpty = (el) => {
+        if (el.type === "checkbox" || el.type === "radio") return !el.checked;
+        return !String(el.value || "").trim();
+      };
+    
+      const validateField = (el) => {
+        // Required + email format
+        if (el.hasAttribute("required")) {
+          if (isEmpty(el)) return false;
+          if (el.type === "email") {
+            const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+            return ok;
+          }
+        }
+        return true;
+      };
+    
+      // Validate on submit
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+    
+        const requiredEls = form.querySelectorAll("input[required], select[required], textarea[required]");
+        let firstInvalid = null;
+    
+        requiredEls.forEach(el => {
+          const ok = validateField(el);
+          showFeedback(el, !ok);
+          if (!ok && !firstInvalid) firstInvalid = el;
+        });
+    
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstInvalid.focus({ preventScroll: true });
+          return; // stop submission until fixed
+        }
+    
+        // ---- SUCCESS: handle your real submit here ----
+        // Example:
+        // fetch('/api/referrals', { method:'POST', body:new FormData(form) })
+        //   .then(...)
+        alert("Referral submitted successfully. Thank you!");
+        form.reset();
+        form.querySelectorAll(".invalid-feedback").forEach(fb => fb.style.display = "none");
+        form.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+      });
+    
+      // Live re-check after the user starts fixing fields (after first submit)
+      form.querySelectorAll("input, select, textarea").forEach(el => {
+        const handler = () => {
+          if (!form) return;
+          // Only start hiding after a field changes
+          const ok = validateField(el);
+          showFeedback(el, !ok && (document.activeElement !== el || isEmpty(el)));
+          if (ok) showFeedback(el, false);
+        };
+        el.addEventListener("input", handler);
+        el.addEventListener("change", handler);
+        el.addEventListener("blur", handler);
+      });
+    });
+    </script>
+    
+<body>
+
+  <!-- Top bar -->
+  <header class="topstrip">
+    <button class="iconbtn" aria-label="Open menu">
+      <span class="bar"></span><span class="bar"></span><span class="bar"></span>
+    </button>
+    <div class="brand">
+      <img src="./images/logo.png" alt="Aple logo" height="32">
+      <span>Aple Property Manager</span>
+    </div>
+    <nav class="actions">
+      <a class="signin" href="./index.html">Home</a>
+    </nav>
+  </header>
+
+  <!-- Drawer (same IDs so script.js works) -->
+  <aside id="aple-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-panel" role="navigation">
+      <div class="drawer-head">
+        <h2 id="drawer-title">Aple Property Manager</h2>
+        <button id="drawer-close" class="iconbtn" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="./index.html" class="drawer-link">Home</a>
+        <a href="./home.html" class="drawer-link">Services</a>
+        <a href="./about.html" class="drawer-link">About</a>
+        <a href="./contact.html" class="drawer-link">Contact</a>
+        <a href="./referral.html" class="drawer-link">Referral</a>
+        <a href="./referral.html#form" class="drawer-cta">Start a Referral</a>
+      </nav>
+      <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
+    </div>
+    <div class="drawer-backdrop" tabindex="-1"></div>
+  </aside>
+
+  <!-- HERO with video -->
+  <section class="page-hero video-hero">
+    <video class="hero-video" autoplay muted playsinline loop poster="./assets/apm11.jpg">
+      <source src="./assets/apmReferral.mp4" type="video/mp4"/>
+    </video>
+  
+    <div class="overlay"></div>
+  
+    <!-- NOTE the center class on page-hero-inner -->
+    <div class="page-hero-inner center">
+      <h1 class="title">Refer a Client</h1>
+  
+      <!-- Centered subtitle -->
+      <p class="subtitle subtitle-chip">
+        Help someone stabilize — earn up to <strong>$100</strong> per successful placement.
+      </p>
+  
+      <a class="cta-btn cta-light" href="#form">Start Referral</a>
+    </div>
+  </section>
+  
+
+  <main class="page-wrap">
+
+    <!-- Incentive & how it works -->
+    <section class="section grid-3">
+      <article class="card">
+        <h2>Why refer to Aple?</h2>
+        <p>Fast placements, clean and quiet homes, documentation support, and locations near transit & downtown. Housing first—dignity always.</p>
+      </article>
+      <article class="card">
+        <h2>Earn up to $100</h2>
+        <p>When your referral moves in and remains in good standing after the minimum stay, referrers can earn up to <strong>$100</strong>. Terms apply (see form).</p>
+      </article>
+      <article class="card">
+        <h2>Who can refer?</h2>
+        <p>Case managers, social workers, nonprofits, VA/hospitals, community orgs—and caring neighbors who want to help.</p>
+      </article>
+    </section>
+
+    <section class="aple-section" id="form">
+        <div class="container" style="max-width:1100px;margin:0 auto;padding:0 16px;">
+          
+          <div class="aple-alert mb-3">
+            Help someone stabilize — earn up to <strong>$100</strong> per successful placement. Terms apply.
+          </div>
+      
+          <div class="aple-card">
+            <h2 class="aple-title">Referral Questionnaire</h2>
+            <p class="aple-subtle mb-3">2–3 minutes. The more detail you share, the faster we can place.</p>
+      
+            <!-- keep your existing form, just add some .row/.col wrappers for layout -->
+            <form id="referralForm" novalidate>
+      
+              <h6 class="aple-subtle" style="margin:8px 0 12px;">Your Info</h6>
+              <div class="row">
+                <div class="col-md-6 group">
+                  <label>Your name*</label>
+                  <input name="ref_name" required>
+                  <div class="invalid-feedback">Please enter your name.</div>
+                </div>
+                <div class="col-md-6 group">
+                  <label>Role/Organization</label>
+                  <input name="ref_role" placeholder="Case manager, VA, nonprofit, friend…">
+                </div>
+                <div class="col-md-6 group">
+                  <label>Email*</label>
+                  <input type="email" name="ref_email" required>
+                  <div class="invalid-feedback">A valid email is required.</div>
+                </div>
+                <div class="col-md-6 group">
+                  <label>Phone*</label>
+                  <input type="tel" name="ref_phone" required>
+                  <div class="invalid-feedback">Please include a phone number.</div>
+                </div>
+              </div>
+      
+              <h6 class="aple-subtle" style="margin:18px 0 12px;">Client Info</h6>
+              <div class="row">
+                <div class="col-md-6 group">
+                  <label>Client name*</label>
+                  <input name="client_name" required>
+                  <div class="invalid-feedback">Client name is required.</div>
+                </div>
+                <div class="col-md-6 group">
+                  <label>Target niche*</label>
+                  <select name="niche" required>
+                    <option value="">Select…</option>
+                    <option>Justice-involved (re-entry)</option>
+                    <option>Recovery / Substance use</option>
+                    <option>Veteran</option>
+                    <option>Senior</option>
+                    <option>SSI recipient</option>
+                    <option>Other</option>
+                  </select>
+                  <div class="invalid-feedback">Choose one option.</div>
+                </div>
+      
+                <div class="col-md-4 group">
+                  <label>Desired housing*</label>
+                  <select name="housing" required>
+                    <option value="">Choose…</option>
+                    <option>Bed space</option>
+                    <option>Private room</option>
+                    <option>Whole unit</option>
+                  </select>
+                  <div class="invalid-feedback">Select a housing type.</div>
+                </div>
+                <div class="col-md-4 group">
+                  <label>Move-in window</label>
+                  <input name="move_in" placeholder="e.g., within 2 weeks">
+                </div>
+                <div class="col-md-4 group">
+                  <label>Income/Benefits</label>
+                  <input name="income" placeholder="Employment, SSI, VA, other">
+                </div>
+      
+                <div class="col-md-6 group">
+                  <label>Supervision / reporting needs</label>
+                  <input name="supervision" placeholder="Parole/probation, VA, court, none">
+                </div>
+                <div class="col-md-6 group">
+                  <label>Accessibility / special needs</label>
+                  <input name="accom" placeholder="Ground floor, ADA, etc.">
+                </div>
+      
+                <div class="col-12 group">
+                  <label>Notes</label>
+                  <textarea name="notes" rows="4" placeholder="Anything we should know to place quickly?"></textarea>
+                </div>
+      
+                <div class="col-12 group">
+                  <div class="form-check">
+                    <input class="form-check-input" id="consent" type="checkbox" name="consent" required>
+                    <label for="consent">I have the client’s permission to share this information for housing placement.</label>
+                  </div>
+                  <div class="invalid-feedback">Consent is required.</div>
+                </div>
+              </div>
+      
+              <p class="aple-subtle" style="margin:6px 0 16px;">
+                <strong>Referral incentive:</strong> Up to $100 after client move-in and minimum stay in good standing.
+                One incentive per client; program partners may have separate terms.
+              </p>
+      
+              <button class="aple-btn" type="submit">Submit Referral</button>
+              <p id="refNote" class="aple-subtle" style="margin-top:10px;font-weight:700;"></p>
+            </form>
+          </div>
+        </div>
+      </section>
+      
+   
+    <!-- Visual band / trust -->
+    <section class="lp-section lp-gallery">
+      <div class="lp-wrap">
+        <h2 class="lp-title">Building Stability Through Community Partnerships</h2>
+        <p class="lp-subtitle">We work alongside re-entry programs, veteran services, and nonprofits to provide stable, supportive housing for every individual who needs a fresh start.</p>
+        
+        <!-- Replace your current gallery wrapper -->
+<div id="partnersRow">
+    <figure class="partner-card">
+      <img src="./assets/apm8.jpg" alt="Partners 1">
+      <figcaption>Partnering with nonprofits & re-entry programs</figcaption>
+    </figure>
+  
+    <figure class="partner-card">
+      <img src="./assets/apm9.jpg" alt="Partners 2">
+      <figcaption>Supporting veterans, seniors, and recovery clients</figcaption>
+    </figure>
+  
+    <figure class="partner-card">
+      <img src="./assets/apm10.jpg" alt="Partners 3">
+      <figcaption>Collaborating with social service & community agencies</figcaption>
+    </figure>
+  </div>
+  
+      </div>
+    </section>
+
+    <!-- Reassurance strip -->
+    <section class="reassure">
+      <div class="reassure-overlay"></div>
+      <div class="reassure-content">
+        <h3>Everything Included</h3>
+        <p>All packages include utilities, in-unit washer & dryer, high-speed internet, and 24/7 security in gated communities near bus routes—minutes from downtown.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="alt-footer">
+    <p>© <span id="year"></span> Aple Property Manager LLC. All rights reserved.</p>
+  </footer>
+
+  <script>
+    // Years
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Simple client-side handler (you can later post to an API)
+    const f = document.getElementById('referralForm');
+    const note = document.getElementById('refNote');
+    f.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      const data = Object.fromEntries(new FormData(f).entries());
+      // store locally for now
+      localStorage.setItem('referral_'+Date.now(), JSON.stringify(data));
+      note.textContent = "Thanks! We received your referral and will follow up within 1–2 business days.";
+      f.reset();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>
