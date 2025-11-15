@@ -108,11 +108,10 @@
       </div>
       <nav class="drawer-nav">
         <a href="./index.html" class="drawer-link">Home</a>
-        <a href="./home.html" class="drawer-link">Services</a>
         <a href="./about.html" class="drawer-link">About</a>
+        <a href="./home.html" class="drawer-link">Services</a>
         <a href="./contact.html" class="drawer-link">Contact</a>
-        <a href="./referral.html" class="drawer-link">Referral</a>
-        <a href="./referral.html#form" class="drawer-cta">Start a Referral</a>
+        <a href="./referral.html" class="drawer-cta">Refer a Client</a>
       </nav>
       <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
     </div>
@@ -171,102 +170,165 @@
             <p class="aple-subtle mb-3">2–3 minutes. The more detail you share, the faster we can place.</p>
       
             <!-- keep your existing form, just add some .row/.col wrappers for layout -->
-            <form id="referralForm" novalidate>
-      
-              <h6 class="aple-subtle" style="margin:8px 0 12px;">Your Info</h6>
-              <div class="row">
-                <div class="col-md-6 group">
-                  <label>Your name*</label>
-                  <input name="ref_name" required>
-                  <div class="invalid-feedback">Please enter your name.</div>
-                </div>
-                <div class="col-md-6 group">
-                  <label>Role/Organization</label>
-                  <input name="ref_role" placeholder="Case manager, VA, nonprofit, friend…">
-                </div>
-                <div class="col-md-6 group">
-                  <label>Email*</label>
-                  <input type="email" name="ref_email" required>
-                  <div class="invalid-feedback">A valid email is required.</div>
-                </div>
-                <div class="col-md-6 group">
-                  <label>Phone*</label>
-                  <input type="tel" name="ref_phone" required>
-                  <div class="invalid-feedback">Please include a phone number.</div>
-                </div>
-              </div>
-      
-              <h6 class="aple-subtle" style="margin:18px 0 12px;">Client Info</h6>
-              <div class="row">
-                <div class="col-md-6 group">
-                  <label>Client name*</label>
-                  <input name="client_name" required>
-                  <div class="invalid-feedback">Client name is required.</div>
-                </div>
-                <div class="col-md-6 group">
-                  <label>Target niche*</label>
-                  <select name="niche" required>
-                    <option value="">Select…</option>
-                    <option>Justice-involved (re-entry)</option>
-                    <option>Recovery / Substance use</option>
-                    <option>Veteran</option>
-                    <option>Senior</option>
-                    <option>SSI recipient</option>
-                    <option>Other</option>
-                  </select>
-                  <div class="invalid-feedback">Choose one option.</div>
-                </div>
-      
-                <div class="col-md-4 group">
-                  <label>Desired housing*</label>
-                  <select name="housing" required>
-                    <option value="">Choose…</option>
-                    <option>Bed space</option>
-                    <option>Private room</option>
-                    <option>Whole unit</option>
-                  </select>
-                  <div class="invalid-feedback">Select a housing type.</div>
-                </div>
-                <div class="col-md-4 group">
-                  <label>Move-in window</label>
-                  <input name="move_in" placeholder="e.g., within 2 weeks">
-                </div>
-                <div class="col-md-4 group">
-                  <label>Income/Benefits</label>
-                  <input name="income" placeholder="Employment, SSI, VA, other">
-                </div>
-      
-                <div class="col-md-6 group">
-                  <label>Supervision / reporting needs</label>
-                  <input name="supervision" placeholder="Parole/probation, VA, court, none">
-                </div>
-                <div class="col-md-6 group">
-                  <label>Accessibility / special needs</label>
-                  <input name="accom" placeholder="Ground floor, ADA, etc.">
-                </div>
-      
-                <div class="col-12 group">
-                  <label>Notes</label>
-                  <textarea name="notes" rows="4" placeholder="Anything we should know to place quickly?"></textarea>
-                </div>
-      
-                <div class="col-12 group">
-                  <div class="form-check">
-                    <input class="form-check-input" id="consent" type="checkbox" name="consent" required>
-                    <label for="consent">I have the client’s permission to share this information for housing placement.</label>
+            <form id="referralForm">
+                <div class="row g-3">
+                  <!-- Your name -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Your name*</label>
+                      <input class="form-control" name="refName" required>
+                      <small class="error-message text-danger" style="display:none;">Please enter your name.</small>
+                    </div>
                   </div>
-                  <div class="invalid-feedback">Consent is required.</div>
+              
+                  <!-- Role/Organization -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Role/Organization</label>
+                      <input class="form-control" name="refRole"
+                             placeholder="Case manager, VA, nonprofit, friend…">
+                    </div>
+                  </div>
+              
+                  <!-- Email -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Email*</label>
+                      <input class="form-control" type="email" name="refEmail" required>
+                      <small class="error-message text-danger" style="display:none;">A valid email is required.</small>
+
+                    </div>
+                  </div>
+              
+                  <!-- Phone -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Phone*</label>
+                      <input class="form-control" name="refPhone" required>
+                      <small class="error-message text-danger" style="display:none;">Please include a phone number.</small>
+                    </div>
+                  </div>
+              
+                  <!-- Client name -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Client name*</label>
+                      <input class="form-control" name="clientName" required>
+                      <small class="error-message text-danger" style="display:none;">Client name is required.</small>
+                    </div>
+                  </div>
+              
+                  <!-- Target niche -->
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Target niche*</label>
+                      <select class="form-select" name="targetNiche" required>
+                        <option value="">Select…</option>
+                        <option>Justice-involved (re-entry)</option>
+                        <option>Recovery / Substance use</option>
+                        <option>Veteran</option>
+                        <option>Senior</option>
+                        <option>SSI recipient</option>
+                        <option>Other</option>
+                      </select>
+                      <small class="error-message text-danger" style="display:none;">Choose one option.</small>
+                    </div>
+                  </div>
                 </div>
-              </div>
-      
-              <p class="aple-subtle" style="margin:6px 0 16px;">
-                <strong>Referral incentive:</strong> Up to $100 after client move-in and minimum stay in good standing.
-                One incentive per client; program partners may have separate terms.
-              </p>
-      
-              <button class="aple-btn" type="submit">Submit Referral</button>
-              <p id="refNote" class="aple-subtle" style="margin-top:10px;font-weight:700;"></p>
-            </form>
+              
+                <!-- the rest of your fields go underneath as full-width rows: -->
+                <div class="row g-3 mt-2">
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Desired housing*</label>
+                      <select class="form-select" name="desiredHousing" required>
+                        <option value="">Choose…</option>
+                        <option>Bed space</option>
+                        <option>Private room</option>
+                        <option>Whole unit</option>
+                      </select>
+                      <small class="error-message text-danger" style="display:none;">Select a housing type.</small>
+                    </div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Move-in window</label>
+                      <input class="form-control" name="moveWindow" placeholder="e.g., within 2 weeks">
+                    </div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Income/Benefits</label>
+                      <input class="form-control" name="incomeBenefits"
+                             placeholder="Employment, SSI, VA, other">
+                    </div>
+                  </div>
+              
+                  <div class="col-md-6">
+                    <div class="group">
+                      <label class="form-label">Accessibility / special needs</label>
+                      <input class="form-control" name="accessNeeds"
+                             placeholder="Ground floor, ADA, etc.">
+                    </div>
+                  </div>
+              
+<div class="row g-3 mt-3">
+    <!-- Supervision / reporting needs -->
+    <div class="col-md-6">
+      <div class="group">
+        <label class="form-label">Supervision / reporting needs</label>
+        <input
+          class="form-control"
+          name="supervisionNeeds"
+          placeholder="Parole/probation, VA, court, none"
+        >
+      </div>
+    </div>
+  
+    <!-- Notes -->
+    <div class="col-md-6">
+      <div class="group">
+        <label class="form-label">Notes</label>
+        <textarea
+          class="form-control"
+          name="notes"
+          rows="4"
+          placeholder="Anything we should know to place quickly?"
+        ></textarea>
+      </div>
+    </div>
+  
+    <!-- Consent checkbox -->
+    <div class="col-12 mt-2">
+      <div class="form-check">
+        <input
+          id="consent"
+          class="form-check-input"
+          type="checkbox"
+          name="consent"
+          required
+        >
+        <label class="form-check-label" for="consent">
+          I have the client’s permission to share this information for housing placement.
+        </label>
+        <small class="error-message text-danger" style="display:none;">Consent is required.</small>
+      </div>
+    </div>
+  
+    <!-- Submit button -->
+    <div class="col-12 mt-3">
+      <div class="d-grid d-md-flex justify-content-md-end">
+        <button type="submit" class="btn aple-btn w-auto px-4 py-2">
+            Submit Referral
+          </button>          
+      </div>
+      <p id="referralNote" class="aple-subtle mt-2 fw-semibold"></p>
+    </div>
+  </div>
+              </form>
+              
           </div>
         </div>
       </section>
@@ -315,22 +377,150 @@
   </footer>
 
   <script>
-    // Years
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // Simple client-side handler (you can later post to an API)
-    const f = document.getElementById('referralForm');
-    const note = document.getElementById('refNote');
-    f.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      const data = Object.fromEntries(new FormData(f).entries());
-      // store locally for now
-      localStorage.setItem('referral_'+Date.now(), JSON.stringify(data));
-      note.textContent = "Thanks! We received your referral and will follow up within 1–2 business days.";
-      f.reset();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    document.getElementById("referralForm").addEventListener("submit", function(e) {
+        e.preventDefault(); // Stop form for validation
+    
+        let isValid = true;
+    
+        // Grab all required fields
+        const requiredFields = document.querySelectorAll("#referralForm [required]");
+    
+        requiredFields.forEach(field => {
+            const errorMsg = field.parentElement.querySelector(".error-message");
+    
+            // If no error message element exists, skip
+            if (!errorMsg) return;
+    
+            if (field.value.trim() === "") {
+                errorMsg.style.display = "block";
+                isValid = false;
+            } else {
+                errorMsg.style.display = "none";
+            }
+        });
+    
+        // If fields invalid → stop here
+        if (!isValid) {
+            return;
+        }
+    
+        // If everything valid → send form
+        document.getElementById("referral-success").style.display = "block";
+    
+        // OPTIONAL: clear the form after submit
+        document.getElementById("referralForm").reset();
+    
+        // Hide all error messages
+        document.querySelectorAll(".error-message").forEach(msg => {
+            msg.style.display = "none";
+        });
     });
-  </script>
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const form = document.getElementById("referralForm");
+          const successModalEl = document.getElementById("referralSuccessModal");
+          const successOkBtn = document.getElementById("referralSuccessOk");
+        
+          // 👉 Use ONE webhook URL – make sure this is the same script you use for Contact
+          const WEBHOOK = "https://script.google.com/macros/s/AKfycbxRkdfbDQhOeRXdW93KVC1K6FbZZl80nIViPRI4REdS4sXSAG_6BD5DLrydW0ORbdMk8Q/exec";
+        
+          // Bootstrap 5 modal instance (if present)
+          const successModal = successModalEl ? new bootstrap.Modal(successModalEl) : null;
+        
+          // Handle form submit
+          form.addEventListener("submit", async (e) => {
+            e.preventDefault(); // stop browser default submit
+        
+            // Native HTML5 validation
+            if (!form.checkValidity()) {
+              form.classList.add("was-validated");
+              return;
+            }
+        
+            try {
+              await sendReferral(form);
+        
+              // On success: show modal or fallback alert
+              if (successModal) {
+                successModal.show();
+              } else {
+                alert("Referral submitted! Thank you.");
+                resetReferralForm(form);
+              }
+            } catch (err) {
+              console.error("Error sending referral:", err);
+              alert("Sorry—could not submit the referral. Please try again.");
+            }
+          });
+        
+          // When user clicks OK on the success modal:
+          if (successOkBtn && successModal) {
+            successOkBtn.addEventListener("click", () => {
+              successModal.hide();
+              resetReferralForm(form);
+            });
+          }
+        
+          // ---- Helpers ----
+        
+          // Build payload sent to Apps Script
+          function buildReferralPayload(form) {
+            return {
+              form: "referral",   // tells Apps Script to use handleReferral
+        
+              refName: form.refName.value.trim(),
+              refRole: form.refRole.value.trim(),
+              refEmail: form.refEmail.value.trim(),
+              refPhone: form.refPhone.value.trim(),
+        
+              clientName: form.clientName.value.trim(),
+              targetNiche: form.targetNiche.value.trim(),
+              desiredHousing: form.desiredHousing.value.trim(),
+              moveWindow: form.moveWindow.value.trim(),
+              incomeBenefits: form.incomeBenefits.value.trim(),
+              supervisionNeeds: form.supervisionNeeds.value.trim(),
+              accessNeeds: form.accessNeeds.value.trim(),
+              notes: form.notes.value.trim(),
+              consent: form.consent.checked,
+              hp: (form.hp?.value || "").trim() // honeypot
+            };
+          }
+        
+          // Send referral to Apps Script
+          async function sendReferral(form) {
+            const payload = buildReferralPayload(form);
+        
+            // For debugging, you can temporarily log this:
+            // console.log("Sending referral payload:", payload);
+        
+            await fetch(WEBHOOK, {
+              method: "POST",
+              mode: "no-cors",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(payload)
+            });
+          }
+        
+          // Completely clear form + validation state
+          function resetReferralForm(form) {
+            // Clear values
+            form.reset();
+        
+            // Remove Bootstrap validation classes
+            form.classList.remove("was-validated");
+            form.querySelectorAll(".is-invalid, .is-valid").forEach(el => {
+              el.classList.remove("is-invalid", "is-valid");
+              el.removeAttribute("aria-invalid");
+            });
+        
+            // Hide any manual error/feedback text
+            form.querySelectorAll(".invalid-feedback, .error-message").forEach(el => {
+              el.style.display = "none";
+            });
+          }
+        });
+        </script>
   <script src="./script.js"></script>
 </body>
 </html>

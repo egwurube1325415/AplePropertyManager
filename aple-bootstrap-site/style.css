@@ -642,3 +642,107 @@ section{scroll-margin-top:90px}
   outline-offset: 2px;
 }
 
+/* Contact form layout & inputs */
+#contactForm { max-width: 720px; }
+#contactForm .group { margin-bottom: 16px; }
+
+#contactForm input:not([type="checkbox"]),
+#contactForm select,
+#contactForm textarea {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  display: block;
+  border: 1px solid #e1dcd4;
+  border-radius: 12px;
+  padding: 12px 14px;
+  font-size: 16px;
+  background: #fff;
+  color: #1a1a1a;
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+#contactForm input:not([type="checkbox"]):focus,
+#contactForm select:focus,
+#contactForm textarea:focus {
+  border-color: #5ca8a4;
+  box-shadow: 0 0 0 4px rgba(92,168,164,.18);
+}
+
+/* Validation (same as referral) */
+.invalid-feedback { 
+  display: none; 
+  color: #d93025; 
+  font-size: 0.9rem; 
+  margin-top: 6px; 
+  font-weight: 600;
+}
+.is-invalid {
+  border-color: #d93025 !important;
+  box-shadow: 0 0 0 3px rgba(217,48,37,.15);
+}
+
+.contact-hours {
+  text-align: center;
+  margin-top: 20px;
+  line-height: 1.6;
+  color: #2b2b2b;
+  font-size: 1rem;
+  background: #f7f5f2;
+  border-radius: 12px;
+  padding: 18px 16px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.contact-hours p {
+  margin: 6px 0;
+}
+
+.contact-hours p strong {
+  color: #14635b;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: 0.3px;
+}
+
+/* Referral form validation styles */
+#referralForm .invalid-feedback {
+  display: none;
+  font-size: 0.875rem;
+  color: #b3261e;
+  margin-top: 4px;
+}
+
+#referralForm .is-invalid {
+  border-color: #b3261e;
+}
+#referralForm .form-label {
+  font-weight: 600;
+}
+
+#referralForm .btn-success {
+  border-radius: 999px; /* pill-style button, looks friendly */
+}
+/* Aple Property Manager button style */
+.aple-btn {
+  background-color: #4FA3A5;     /* calming teal */
+  color: white;
+  border: none;
+  border-radius: 25px;           /* smooth pill shape */
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+.aple-btn:hover {
+  background-color: #3c8a8c;     /* slightly darker teal */
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.25);
+}
+
+.aple-btn:active {
+  transform: translateY(0);
+  box-shadow: none;
+}

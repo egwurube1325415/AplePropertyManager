@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
+    
 <body>
 
   <!-- Top bar -->
@@ -33,8 +34,8 @@
       </div>
       <nav class="drawer-nav">
         <a href="./index.html" class="drawer-link">Home</a>
-        <a href="./home.html" class="drawer-link">Services</a>
         <a href="./about.html" class="drawer-link">About</a>
+        <a href="./home.html" class="drawer-link">Services</a>
         <a href="./contact.html" class="drawer-link">Contact</a>
         <a href="./index.html#contact" class="drawer-cta">Refer a Client</a>
       </nav>
@@ -67,40 +68,56 @@
           </li>
           <li>
             <span>Email</span>
-            <a href="mailto:peteregwurube162@gmail.com">peteregwurube162@gmail.com</a>
+            <a href="mailto:apmindependentgrouphomes@gmail.com">apmindependentgrouphomes@gmail.com</a>
           </li>
           <li>
             <span>City</span>
             <em>Houston, Texas</em>
           </li>
         </ul>
-        <p class="small-note">Best times: Mon–Fri, 9am–6pm CT. After hours? Leave a message—we check daily.</p>
+        
+        <div class="contact-hours">
+            <p>Best times:</p>
+            <p><strong>Mon–Fri, 9am–4:30pm CST</strong></p>
+            <p>After hours? Leave a message, we check daily.</p>
+          </div>          
+        
       </article>
 
       <!-- Message form -->
-      <article class="card">
-        <h2>Send a message</h2>
-        <form id="contactForm" class="contact-form">
-          <label>
-            <span>Your name</span>
-            <input name="name" autocomplete="name" required/>
-          </label>
-          <label>
-            <span>Email</span>
-            <input type="email" name="email" autocomplete="email" required/>
-          </label>
-          <label>
-            <span>Phone (optional)</span>
-            <input type="tel" name="phone" autocomplete="tel"/>
-          </label>
-          <label>
-            <span>How can we help?</span>
-            <textarea name="message" rows="4" required></textarea>
-          </label>
-          <button class="cta-btn" type="submit">Send</button>
-          <p id="formNote" class="form-note" role="status" aria-live="polite"></p>
-        </form>
-      </article>
+      <form id="contactForm">
+        <div class="group">
+          <label>Your name*</label>
+          <input name="name" required>
+          <div class="invalid-feedback">Please enter your name.</div>
+        </div>
+      
+        <div class="group">
+          <label>Email*</label>
+          <input type="email" name="email" required>
+          <div class="invalid-feedback">Please enter a valid email.</div>
+        </div>
+      
+        <div class="group">
+          <label>Phone (optional)</label>
+          <input type="tel" name="phone">
+        </div>
+      
+        <div class="group">
+          <label>How can we help?*</label>
+          <textarea name="message" rows="5" required></textarea>
+          <div class="invalid-feedback">Please tell us how we can help.</div>
+        </div>
+      
+        <!-- Honeypot (hidden from humans, bots may fill it) -->
+        <input type="text" name="hp" autocomplete="off" tabindex="-1" style="display:none;">
+      
+        <button type="submit" class="aple-btn">Send</button>
+        <p id="contactNote" class="aple-subtle" style="margin-top:10px;font-weight:700;"></p>
+      </form>
+      
+      
+
     </section>
 
     <!-- Optional map/image band -->
@@ -130,5 +147,89 @@
     });
   </script>
   <script src="./script.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contactForm");
+      const note = document.getElementById("contactNote");
+    
+      // 1) Paste your Apps Script Web App URL here:
+      const WEBHOOK = "https://script.google.com/macros/s/AKfycbxRkdfbDQhOeRXdW93KVC1K6FbZZl80nIViPRI4REdS4sXSAG_6BD5DLrydW0ORbdMk8Q/exec";
+    
+      async function sendToGmail() {
+        const payload = {
+          name: form.name.value.trim(),
+          email: form.email.value.trim(),
+          phone: form.phone.value.trim(),
+          message: form.message.value.trim(),
+          hp: form.hp.value.trim() // honeypot
+        };
+    
+        // Optional: simple button state
+        const btn = form.querySelector('button[type="submit"]');
+        const old = btn.textContent;
+        btn.disabled = true; btn.textContent = "Sending…";
+    
+        try {
+          // Apps Script web apps commonly require "no-cors" for public POST
+          await fetch(WEBHOOK, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload)
+          });
+    
+          note.textContent = "Thanks! Your message has been sent. We’ll get back to you soon.";
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          note.textContent = "Sorry—couldn’t send your message. Please try again.";
+        } finally {
+          btn.disabled = false; btn.textContent = old;
+        }
+      }
+    
+      // Hook this into your existing submit handler AFTER validation:
+      // Example pattern (keep your own validation logic):
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+    
+        // --- your existing validation that sets `firstInvalid` ---
+        const requiredEls = form.querySelectorAll("input[required], textarea[required], select[required]");
+        let firstInvalid = null;
+    
+        form.querySelectorAll(".invalid-feedback").forEach(fb => fb.style.display = "none");
+        form.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
+    
+        const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||"").trim());
+        const validateField = (el) => {
+          if (!el.hasAttribute("required")) return true;
+          const v = (el.value || "").trim();
+          if (!v) return false;
+          if (el.type === "email") return emailOk(v);
+          return true;
+        };
+    
+        requiredEls.forEach(el => {
+          const ok = validateField(el);
+          const fb = el.closest(".group")?.querySelector(".invalid-feedback");
+          if (!ok) {
+            if (fb) fb.style.display = "block";
+            el.classList.add("is-invalid");
+            if (!firstInvalid) firstInvalid = el;
+          }
+        });
+    
+        if (firstInvalid) {
+          firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
+          firstInvalid.focus({ preventScroll: true });
+          return;
+        }
+    
+        // ---- All good: send to your mailbox ----
+        await sendToGmail();
+      });
+    });
+    </script>
+    
 </body>
 </html>
