@@ -25,7 +25,7 @@
     </nav>
   </header>
 
-  <!-- Drawer (same IDs so script.js works) -->
+  <!-- Drawer -->
   <aside id="aple-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
     <div class="drawer-panel" role="navigation">
       <div class="drawer-head">
@@ -37,7 +37,7 @@
         <a href="./about.html" class="drawer-link">About</a>
         <a href="./home.html" class="drawer-link">Services</a>
         <a href="./contact.html" class="drawer-link">Contact</a>
-        <a href="./index.html#contact" class="drawer-cta">Refer a Client</a>
+        <a href="./referral.html" class="drawer-cta">Refer a Client</a>
       </nav>
       <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
     </div>
@@ -77,10 +77,10 @@
         </ul>
         
         <div class="contact-hours">
-            <p>Best times:</p>
-            <p><strong>Mon–Fri, 9am–4:30pm CST</strong></p>
-            <p>After hours? Leave a message, we check daily.</p>
-          </div>          
+          <p>Best times:</p>
+          <p><strong>Mon–Fri, 9am–4:30pm CST</strong></p>
+          <p>After hours? Leave a message, we check daily.</p>
+        </div>          
         
       </article>
 
@@ -102,6 +102,18 @@
           <label>Phone (optional)</label>
           <input type="tel" name="phone">
         </div>
+
+        <!-- NEW: preferred contact date -->
+        <div class="group">
+          <label>Preferred contact date (optional)</label>
+          <input type="date" name="preferredDate">
+        </div>
+
+        <!-- NEW: preferred contact time -->
+        <div class="group">
+          <label>Preferred contact time (optional)</label>
+          <input type="time" name="preferredTime">
+        </div>
       
         <div class="group">
           <label>How can we help?*</label>
@@ -115,9 +127,6 @@
         <button type="submit" class="aple-btn">Send</button>
         <p id="contactNote" class="aple-subtle" style="margin-top:10px;font-weight:700;"></p>
       </form>
-      
-      
-
     </section>
 
     <!-- Optional map/image band -->
@@ -134,73 +143,32 @@
     <p>© <span id="year"></span> Aple Property Manager LLC. All rights reserved.</p>
   </footer>
 
-  <script>
-    // year + lightweight form handler (local only)
-    document.getElementById('year').textContent = new Date().getFullYear();
-    const form = document.getElementById('contactForm');
-    const note = document.getElementById('formNote');
-    form.addEventListener('submit', (e)=>{
-      e.preventDefault();
-      // You can swap this for a real endpoint later (Fetch/Email API)
-      note.textContent = "Thanks! Your message has been received.";
-      form.reset();
-    });
-  </script>
+  <!-- Existing drawer / slideshow JS -->
   <script src="./script.js"></script>
+
+  <!-- Contact form -> Apps Script -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
+      // footer year
+      document.getElementById("year").textContent = new Date().getFullYear();
+
       const form = document.getElementById("contactForm");
       const note = document.getElementById("contactNote");
-    
-      // 1) Paste your Apps Script Web App URL here:
-      const WEBHOOK = "https://script.google.com/macros/s/AKfycbxRkdfbDQhOeRXdW93KVC1K6FbZZl80nIViPRI4REdS4sXSAG_6BD5DLrydW0ORbdMk8Q/exec";
-    
-      async function sendToGmail() {
-        const payload = {
-          name: form.name.value.trim(),
-          email: form.email.value.trim(),
-          phone: form.phone.value.trim(),
-          message: form.message.value.trim(),
-          hp: form.hp.value.trim() // honeypot
-        };
-    
-        // Optional: simple button state
-        const btn = form.querySelector('button[type="submit"]');
-        const old = btn.textContent;
-        btn.disabled = true; btn.textContent = "Sending…";
-    
-        try {
-          // Apps Script web apps commonly require "no-cors" for public POST
-          await fetch(WEBHOOK, {
-            method: "POST",
-            mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
-          });
-    
-          note.textContent = "Thanks! Your message has been sent. We’ll get back to you soon.";
-          form.reset();
-        } catch (err) {
-          console.error(err);
-          note.textContent = "Sorry—couldn’t send your message. Please try again.";
-        } finally {
-          btn.disabled = false; btn.textContent = old;
-        }
-      }
-    
-      // Hook this into your existing submit handler AFTER validation:
-      // Example pattern (keep your own validation logic):
+
+      // Same webhook as referral form
+      const WEBHOOK = "https://script.google.com/macros/s/AKfycbzC0i_zrPMP3QgIaGr58G3mHo6NBMPjX0WcxqKLiwSGR5bnpmVFO_nouVOrvAnZa-fq_g/exec";
+
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
-    
-        // --- your existing validation that sets `firstInvalid` ---
-        const requiredEls = form.querySelectorAll("input[required], textarea[required], select[required]");
+
+        // basic validation
+        const requiredEls = form.querySelectorAll("input[required], textarea[required]");
         let firstInvalid = null;
-    
+
         form.querySelectorAll(".invalid-feedback").forEach(fb => fb.style.display = "none");
         form.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
-    
-        const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v||"").trim());
+
+        const emailOk = v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test((v || "").trim());
         const validateField = (el) => {
           if (!el.hasAttribute("required")) return true;
           const v = (el.value || "").trim();
@@ -208,7 +176,7 @@
           if (el.type === "email") return emailOk(v);
           return true;
         };
-    
+
         requiredEls.forEach(el => {
           const ok = validateField(el);
           const fb = el.closest(".group")?.querySelector(".invalid-feedback");
@@ -218,18 +186,48 @@
             if (!firstInvalid) firstInvalid = el;
           }
         });
-    
+
         if (firstInvalid) {
           firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
           firstInvalid.focus({ preventScroll: true });
           return;
         }
-    
-        // ---- All good: send to your mailbox ----
-        await sendToGmail();
+
+        // build payload
+        const body = new URLSearchParams();
+        body.append("form", "contact");
+        body.append("name", form.name.value.trim());
+        body.append("email", form.email.value.trim());
+        body.append("phone", form.phone.value.trim());
+        body.append("preferredDate", form.preferredDate.value);     // NEW
+        body.append("preferredTime", form.preferredTime.value);     // NEW
+        body.append("message", form.message.value.trim());
+        body.append("hp", form.hp.value.trim());
+
+        const btn = form.querySelector('button[type="submit"]');
+        const oldText = btn.textContent;
+        btn.disabled = true;
+        btn.textContent = "Sending…";
+
+        try {
+          await fetch(WEBHOOK, {
+            method: "POST",
+            mode: "no-cors",
+            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+            body: body.toString()
+          });
+
+          note.textContent = "Thanks! Your message has been sent. We’ll get back to you soon.";
+          form.reset();
+        } catch (err) {
+          console.error(err);
+          note.textContent = "Sorry—couldn’t send your message. Please try again.";
+        } finally {
+          btn.disabled = false;
+          btn.textContent = oldText;
+        }
       });
     });
-    </script>
-    
+  </script>
 </body>
 </html>

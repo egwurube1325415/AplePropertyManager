@@ -8,81 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
 </head>
-<script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("referralForm");
-      if (!form) return;
-    
-      const showFeedback = (el, show) => {
-        const group = el.closest(".group") || el.parentElement;
-        const fb = group ? group.querySelector(".invalid-feedback") : null;
-        if (fb) fb.style.display = show ? "block" : "none";
-        el.classList.toggle("is-invalid", show);
-        el.setAttribute("aria-invalid", show ? "true" : "false");
-      };
-    
-      const isEmpty = (el) => {
-        if (el.type === "checkbox" || el.type === "radio") return !el.checked;
-        return !String(el.value || "").trim();
-      };
-    
-      const validateField = (el) => {
-        // Required + email format
-        if (el.hasAttribute("required")) {
-          if (isEmpty(el)) return false;
-          if (el.type === "email") {
-            const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
-            return ok;
-          }
-        }
-        return true;
-      };
-    
-      // Validate on submit
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-    
-        const requiredEls = form.querySelectorAll("input[required], select[required], textarea[required]");
-        let firstInvalid = null;
-    
-        requiredEls.forEach(el => {
-          const ok = validateField(el);
-          showFeedback(el, !ok);
-          if (!ok && !firstInvalid) firstInvalid = el;
-        });
-    
-        if (firstInvalid) {
-          firstInvalid.scrollIntoView({ behavior: "smooth", block: "center" });
-          firstInvalid.focus({ preventScroll: true });
-          return; // stop submission until fixed
-        }
-    
-        // ---- SUCCESS: handle your real submit here ----
-        // Example:
-        // fetch('/api/referrals', { method:'POST', body:new FormData(form) })
-        //   .then(...)
-        alert("Referral submitted successfully. Thank you!");
-        form.reset();
-        form.querySelectorAll(".invalid-feedback").forEach(fb => fb.style.display = "none");
-        form.querySelectorAll(".is-invalid").forEach(el => el.classList.remove("is-invalid"));
-      });
-    
-      // Live re-check after the user starts fixing fields (after first submit)
-      form.querySelectorAll("input, select, textarea").forEach(el => {
-        const handler = () => {
-          if (!form) return;
-          // Only start hiding after a field changes
-          const ok = validateField(el);
-          showFeedback(el, !ok && (document.activeElement !== el || isEmpty(el)));
-          if (ok) showFeedback(el, false);
-        };
-        el.addEventListener("input", handler);
-        el.addEventListener("change", handler);
-        el.addEventListener("blur", handler);
-      });
-    });
-    </script>
-    
+
 <body>
 
   <!-- Top bar -->
@@ -377,150 +303,94 @@
   </footer>
 
   <script>
-    document.getElementById("referralForm").addEventListener("submit", function(e) {
-        e.preventDefault(); // Stop form for validation
-    
-        let isValid = true;
-    
-        // Grab all required fields
-        const requiredFields = document.querySelectorAll("#referralForm [required]");
-    
-        requiredFields.forEach(field => {
-            const errorMsg = field.parentElement.querySelector(".error-message");
-    
-            // If no error message element exists, skip
-            if (!errorMsg) return;
-    
-            if (field.value.trim() === "") {
-                errorMsg.style.display = "block";
-                isValid = false;
-            } else {
-                errorMsg.style.display = "none";
-            }
-        });
-    
-        // If fields invalid → stop here
-        if (!isValid) {
-            return;
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("referralForm");
+  
+      const WEBHOOK = "https://script.google.com/macros/s/AKfycbzC0i_zrPMP3QgIaGr58G3mHo6NBMPjX0WcxqKLiwSGR5bnpmVFO_nouVOrvAnZa-fq_g/exec";
+  
+      if (!form) {
+        console.error("Referral form not found");
+        return;
+      }
+  
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+  
+        // Native HTML5 validation
+        if (!form.checkValidity()) {
+          form.classList.add("was-validated");
+          return;
         }
-    
-        // If everything valid → send form
-        document.getElementById("referral-success").style.display = "block";
-    
-        // OPTIONAL: clear the form after submit
-        document.getElementById("referralForm").reset();
-    
-        // Hide all error messages
-        document.querySelectorAll(".error-message").forEach(msg => {
-            msg.style.display = "none";
+  
+        try {
+          await sendReferral(form);
+  
+          // Simple success UX
+          alert("Referral submitted! Thank you.");
+          resetReferralForm(form);
+        } catch (err) {
+          console.error("Error sending referral:", err);
+          alert("Sorry—could not submit the referral. Please try again.");
+        }
+      });
+  
+      // 🔑 Send URL-encoded body that matches Apps Script expectations
+      async function sendReferral(form) {
+        const payload = {
+          form: "referral",
+  
+          refName: form.refName.value.trim(),
+          refRole: form.refRole.value.trim(),
+          refEmail: form.refEmail.value.trim(),
+          refPhone: form.refPhone.value.trim(),
+  
+          clientName: form.clientName.value.trim(),
+          targetNiche: form.targetNiche.value,
+          desiredHousing: form.desiredHousing.value,
+          moveWindow: form.moveWindow.value.trim(),
+          incomeBenefits: form.incomeBenefits.value.trim(),
+          accessNeeds: form.accessNeeds.value.trim(),
+          supervisionNeeds: form.supervisionNeeds.value.trim(),
+          notes: form.notes.value.trim(),
+  
+          consent: form.consent.checked ? "true" : "false"
+        };
+  
+        const body = new URLSearchParams();
+        Object.entries(payload).forEach(([key, value]) => {
+          body.append(key, value);
         });
+  
+        await fetch(WEBHOOK, {
+          method: "POST",
+          mode: "no-cors",
+          headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+          },
+          body
+        });
+      }
+  
+      function resetReferralForm(form) {
+        form.reset();
+        form.classList.remove("was-validated");
+  
+        form.querySelectorAll(".is-invalid, .is-valid").forEach(el => {
+          el.classList.remove("is-invalid", "is-valid");
+          el.removeAttribute("aria-invalid");
+        });
+  
+        form.querySelectorAll(".invalid-feedback, .error-message").forEach(el => {
+          el.style.display = "none";
+        });
+      }
     });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const form = document.getElementById("referralForm");
-          const successModalEl = document.getElementById("referralSuccessModal");
-          const successOkBtn = document.getElementById("referralSuccessOk");
-        
-          // 👉 Use ONE webhook URL – make sure this is the same script you use for Contact
-          const WEBHOOK = "https://script.google.com/macros/s/AKfycbxRkdfbDQhOeRXdW93KVC1K6FbZZl80nIViPRI4REdS4sXSAG_6BD5DLrydW0ORbdMk8Q/exec";
-        
-          // Bootstrap 5 modal instance (if present)
-          const successModal = successModalEl ? new bootstrap.Modal(successModalEl) : null;
-        
-          // Handle form submit
-          form.addEventListener("submit", async (e) => {
-            e.preventDefault(); // stop browser default submit
-        
-            // Native HTML5 validation
-            if (!form.checkValidity()) {
-              form.classList.add("was-validated");
-              return;
-            }
-        
-            try {
-              await sendReferral(form);
-        
-              // On success: show modal or fallback alert
-              if (successModal) {
-                successModal.show();
-              } else {
-                alert("Referral submitted! Thank you.");
-                resetReferralForm(form);
-              }
-            } catch (err) {
-              console.error("Error sending referral:", err);
-              alert("Sorry—could not submit the referral. Please try again.");
-            }
-          });
-        
-          // When user clicks OK on the success modal:
-          if (successOkBtn && successModal) {
-            successOkBtn.addEventListener("click", () => {
-              successModal.hide();
-              resetReferralForm(form);
-            });
-          }
-        
-          // ---- Helpers ----
-        
-          // Build payload sent to Apps Script
-          function buildReferralPayload(form) {
-            return {
-              form: "referral",   // tells Apps Script to use handleReferral
-        
-              refName: form.refName.value.trim(),
-              refRole: form.refRole.value.trim(),
-              refEmail: form.refEmail.value.trim(),
-              refPhone: form.refPhone.value.trim(),
-        
-              clientName: form.clientName.value.trim(),
-              targetNiche: form.targetNiche.value.trim(),
-              desiredHousing: form.desiredHousing.value.trim(),
-              moveWindow: form.moveWindow.value.trim(),
-              incomeBenefits: form.incomeBenefits.value.trim(),
-              supervisionNeeds: form.supervisionNeeds.value.trim(),
-              accessNeeds: form.accessNeeds.value.trim(),
-              notes: form.notes.value.trim(),
-              consent: form.consent.checked,
-              hp: (form.hp?.value || "").trim() // honeypot
-            };
-          }
-        
-          // Send referral to Apps Script
-          async function sendReferral(form) {
-            const payload = buildReferralPayload(form);
-        
-            // For debugging, you can temporarily log this:
-            // console.log("Sending referral payload:", payload);
-        
-            await fetch(WEBHOOK, {
-              method: "POST",
-              mode: "no-cors",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify(payload)
-            });
-          }
-        
-          // Completely clear form + validation state
-          function resetReferralForm(form) {
-            // Clear values
-            form.reset();
-        
-            // Remove Bootstrap validation classes
-            form.classList.remove("was-validated");
-            form.querySelectorAll(".is-invalid, .is-valid").forEach(el => {
-              el.classList.remove("is-invalid", "is-valid");
-              el.removeAttribute("aria-invalid");
-            });
-        
-            // Hide any manual error/feedback text
-            form.querySelectorAll(".invalid-feedback, .error-message").forEach(el => {
-              el.style.display = "none";
-            });
-          }
-        });
-        </script>
+  </script>
+  
   <script src="./script.js"></script>
+  
+  
+  <script src="./script.js"></script>
+  
 </body>
 </html>
