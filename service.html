@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Services | Aple Property Manager</title>
+  <link rel="stylesheet" href="./style.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- Top strip -->
+  <header class="apm-header">
+    <div class="apm-brand">
+      Aple Property Manager
+    </div>
+  
+    <nav class="apm-nav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About</a>
+      <a href="services.html">Services</a>
+      <a href="referrals.html">Referrals</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </header>
+  
+  
+
+  <!-- Drawer -->
+  <aside id="aple-drawer" class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" aria-hidden="true">
+    <div class="drawer-panel" role="navigation">
+      <div class="drawer-head">
+        <h2 id="drawer-title">Aple Property Manager</h2>
+        <button id="drawer-close" class="iconbtn" aria-label="Close menu">✕</button>
+      </div>
+      <nav class="drawer-nav">
+        <a href="./index.html" class="drawer-link">Home</a>
+        <a href="./about.html" class="drawer-link">About</a>
+        <a href="./service.html" class="drawer-link">Services</a>
+        <a href="./referral.html" class="drawer-link">Referrals</a>
+        <a href="./contact.html" class="drawer-cta">Contact</a>
+      </nav>
+      
+      <div class="drawer-foot"><small>© <span id="drawerYear"></span> Aple Property Manager</small></div>
+    </div>
+    <div class="drawer-backdrop" tabindex="-1"></div>
+  </aside>
+
+  <!-- HERO: Services video header (scene7.mp4) -->
+  <section class="page-hero video-hero">
+    <video class="hero-video" autoplay muted playsinline loop poster="./assets/apm11.jpg">
+      <source src="./assets/scene7.mp4" type="video/mp4"/>
+    </video>
+    <div class="overlay" aria-hidden="true"></div>
+    <div class="page-hero-inner">
+      <h1 class="title">Services & Pricing</h1>
+      <p class="subtitle">Rapid Re-Housing • Re-Entry Services • Wraparound Support</p>
+      <a class="cta-btn cta-light" href="./contact.html">Start a Placement</a>
+    </div>
+  </section>
+
+  <main class="page-wrap">
+
+    <!-- Fast value props -->
+    <section class="section lp-value">
+      <div class="lp-grid-3">
+        <article class="lp-card">
+          <h3>Rapid Re-Housing</h3>
+          <p>Fast placement for <em>(your target niche)</em> so parole, recovery, and benefits don’t stall.</p>
+        </article>
+        <article class="lp-card">
+          <h3>Re-Entry Support</h3>
+          <p>Quiet, well-kept homes with documentation and reporting for supervision requirements.</p>
+        </article>
+        <article class="lp-card">
+          <h3>Human Services Partners</h3>
+          <p>We coordinate with VA, hospitals, nonprofits, shelters, and community agencies.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Packages & pricing (updated) -->
+<section class="section">
+    <h2 class="lp-title">Housing Packages</h2>
+    <p class="lp-sub">
+      We offer flexible options—<strong>bed space</strong>, <strong>private rooms</strong>, and <strong>whole units</strong>—with simple terms and fast placements.
+      <br><strong>Pricing starts at $550/month.</strong>
+    </p>
+  
+    <div class="pricing-grid">
+      <!-- Bed Space -->
+      <article class="price-card">
+        <div class="price-head">
+          <h3>Bed Space</h3>
+          
+        </div>
+        <ul class="checklist">
+          <li>Shared room in a quiet, well-kept home</li>
+          <li>Washer &amp; dryer on site</li>
+          <li>High-speed internet</li>
+          <li>24/7 security monitoring</li>
+          <li>Gated community, near bus routes &amp; downtown</li>
+          <li>Clear standards: cleanliness &amp; quiet hours</li>
+          <li>Documentation &amp; reporting support</li>
+        </ul>
+        <a class="cta-btn" href="./contact.html">Request Availability</a>
+      </article>
+  
+      <!-- Private Room -->
+      <article class="price-card featured">
+        <div class="badge">Most Popular</div>
+        <div class="price-head">
+          <h3>Private Room</h3>
+         
+        </div>
+        <ul class="checklist">
+          <li>Private, lockable bedroom</li>
+          <li>Washer &amp; dryer + high-speed internet</li>
+          <li>24/7 security monitoring</li>
+          <li>Gated community, close to transit &amp; downtown</li>
+          <li>Furnished options available</li>
+          <li>Neighbors &amp; HOA-friendly standards</li>
+          <li>Optional wraparound support (jobs/benefits)</li>
+        </ul>
+        <a class="cta-btn" href="./contact.html">Get a Quote</a>
+      </article>
+  
+      <!-- Whole Unit -->
+      <article class="price-card">
+        <div class="price-head">
+          <h3>Whole Unit</h3>
+          
+        </div>
+        <ul class="checklist">
+          <li>Entire house or apartment</li>
+          <li>Ideal for agency &amp; program partners</li>
+          <li>Washer &amp; dryer, internet, security</li>
+          <li>Gated communities near bus routes</li>
+          <li>Flexible terms, compliance support</li>
+          <li>Property standards &amp; inspections</li>
+          <li>Dedicated coordinator</li>
+        </ul>
+        <a class="cta-btn" href="./contact.html">Discuss Program</a>
+      </article>
+    </div>
+  
+    <!-- Visual proof + model link -->
+    <div class="lp-gallery" style="margin-top:18px;">
+      <div class="lp-grid-3 images">
+        <figure><img src="./assets/ApmLivingRoom.jpg" alt="Inviting common area"><figcaption>Inviting common areas</figcaption></figure>
+        <figure><img src="./assets/apmBedroom.jpg" alt="Comfortable bedroom"><figcaption>Comfortable bedrooms</figcaption></figure>
+        <figure><img src="./assets/apmKitchen.jpg" alt="Clean kitchen"><figcaption>Clean, maintained kitchens</figcaption></figure>
+      </div>
+      <div class="link-row">
+        <a class="cta-btn cta-light" href="https://www.khov.com/new-construction-homes/texas/houston/cloverdale/jefferson-ii/" target="_blank" rel="noopener">
+          View a Model Home Example
+        </a>
+        <a class="cta-btn" href="./contact.html">Place a Client</a>
+      </div>
+    </div>
+  
+   
+   <!-- Reassurance banner with background images -->
+<section class="reassure">
+    <div class="reassure-overlay"></div>
+    <div class="reassure-content">
+      <h3>Everything You Need, Included</h3>
+      <p>
+        All packages come fully equipped — <strong>utilities included</strong>, plus
+        in-unit washer &amp; dryer, high-speed internet, and 24/7 security.
+        Our homes are located in <strong>gated communities</strong> just minutes
+        from downtown Houston and <strong>close to major bus routes</strong> for
+        easy access to work, treatment, or community resources.
+      </p>
+    </div>
+  </section>
+  
+  </section>
+  
+    <!-- Partner Keywords -->
+    <section class="section lp-chips">
+      <h2 class="lp-title">Who We Partner With</h2>
+      <ul class="chip-wall">
+        <li>Nonprofits for <em>Rapid rehoused</em></li>
+        <li>Human Services</li>
+        <li>Senior Citizen Service Orgs</li>
+        <li>Social Service &amp; Welfare Orgs</li>
+        <li>American Legion</li>
+        <li>VFW</li>
+        <li>Social Workers for <em>Re-Housing</em></li>
+        <li>Case Workers for <em>Un-housed</em></li>
+        <li>Psychiatric Social Workers</li>
+        <li>VA Hospitals</li>
+        <li>Chemical Dependency Hospitals</li>
+        <li>Rehabilitation Hospitals</li>
+        <li>Homeless Shelters</li>
+        <li>Substance Abuse Centers</li>
+        <li>Addiction Treatment Centers</li>
+        <li>Rehabilitation Services</li>
+        <li>Community Action Agencies</li>
+        <li>VA Clinics</li>
+        <li>Shelters for <em>un-housed</em></li>
+        <li>Alcoholism Treatment Centers</li>
+      </ul>
+    </section>
+
+    <!-- Visual proof: gallery + “see a model” link -->
+    <section class="section lp-gallery">
+      <h2 class="lp-title">See What a Calm, Clean Home Looks Like</h2>
+      <div class="lp-grid-3 images">
+        <figure><img src="./assets/ApmLivingRoom.jpg" alt="Inviting living area"><figcaption>Inviting living areas</figcaption></figure>
+        <figure><img src="./assets/apmBedroom.jpg" alt="Comfortable bedroom"><figcaption>Comfortable bedrooms</figcaption></figure>
+        <figure><img src="./assets/apmKitchen.jpg" alt="Tidy kitchen"><figcaption>Tidy kitchens</figcaption></figure>
+      </div>
+      <div class="link-row">
+        <a class="cta-btn cta-light" href="https://www.khov.com/new-construction-homes/texas/houston/cloverdale/jefferson-ii/" target="_blank" rel="noopener">View a Model Home Example</a>
+        <a class="cta-btn" href="./contact.html">Place a Client</a>
+      </div>
+    </section>
+
+    <!-- Final video band CTA (reuses scene7 poster for continuity) -->
+    <section class="lp-section lp-video-band">
+      <div class="lp-video-wrap">
+        <video class="lp-band-video" autoplay muted playsinline loop poster="./assets/apm11.jpg">
+          <source src="./assets/scene7.mp4" type="video/mp4"/>
+        </video>
+        <div class="lp-band-overlay"></div>
+        <div class="lp-band-content">
+          <h2>Ready to Stabilize Someone Today?</h2>
+          <p>Fast placements, steady standards, and responsive support.</p>
+          <a class="cta-btn" href="./contact.html">Get Started</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="alt-footer">
+    <p><strong>Aple Property Manager LLC</strong> · Housing first, dignity always in Houston, Texas.</p>
+    <p>Referrals: 
+      <a href="mailto:apmindependentgrouphomes@gmail.com">apmindependentgrouphomes@gmail.com</a> 
+      · <a href="tel:+14099980516">+1 (409) 998-0516</a>
+    </p>
+    <p>© <span id="year"></span> Aple Property Manager LLC. All rights reserved.</p>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+  <script src="./script.js"></script>
+</body>
+</html>

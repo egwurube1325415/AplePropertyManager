@@ -320,10 +320,61 @@ section{scroll-margin-top:90px}
 .cta-light:hover{ background:#fff; }
 
 /* Gallery */
-.lp-gallery{ background:#f7f4ef; }
-.lp-gallery .images figure{ margin:0; }
-.lp-gallery img{ width:100%; height:280px; object-fit:cover; border-radius:16px; border:1px solid #e6e2dc; }
-.lp-gallery figcaption{ text-align:center; margin-top:8px; color:#6b6b6b; }
+.lp-gallery{
+  background:#f7f4ef;
+}
+
+.lp-gallery .lp-wrap{
+  padding-top:32px;
+  padding-bottom:40px;
+}
+
+.lp-gallery .lp-title{
+  text-align:center;
+  margin-bottom:8px;
+}
+
+.lp-gallery .lp-sub{
+  text-align:center;
+  margin-bottom:24px;
+}
+
+/* 3-up grid for the images */
+.lp-gallery .images{
+  display:grid;
+  grid-template-columns:repeat(3, minmax(0,1fr));
+  gap:20px;
+}
+
+@media (max-width:900px){
+  .lp-gallery .images{
+    grid-template-columns:1fr;
+  }
+}
+
+.lp-gallery figure{
+  margin:0;
+  text-align:center;
+}
+
+.lp-gallery img{
+  width:100%;
+  height:260px;
+  object-fit:cover;
+  border-radius:18px;
+  border:1px solid #e6e2dc;
+  box-shadow:0 8px 24px rgba(0,0,0,.08);
+  display:block;
+  background:#fff;
+}
+
+.lp-gallery figcaption{
+  margin-top:10px;
+  font-size:0.98rem;
+  font-weight:500;
+  color:#444;
+}
+
 
 /* CTA button (uses your palette) */
 .cta-btn{
