@@ -96,4 +96,21 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     const y = drawer.querySelector('#drawerYear'); if (y) y.textContent = new Date().getFullYear();
   }
+  // Simple GA4 click tracking for main CTAs
+(function () {
+  if (typeof gtag !== 'function') return; // GA not loaded
+
+  const gaElements = document.querySelectorAll('[data-ga]');
+  gaElements.forEach(el => {
+    el.addEventListener('click', () => {
+      const action = el.getAttribute('data-ga');
+      gtag('event', 'cta_click', {
+        action,                 // e.g. cta_refer_client
+        link_text: el.textContent.trim(),
+        page_path: window.location.pathname
+      });
+    });
+  });
+})();
+
 });
